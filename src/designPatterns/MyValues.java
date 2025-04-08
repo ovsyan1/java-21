@@ -6,15 +6,15 @@ import java.util.List;
 public class MyValues {
     List<Integer> list;
 
-    MyValues(List<Integer> list) {
+    public MyValues(List<Integer> list) {
         this.list = list;
     }
 
-    List<Integer> getValues() {
+    public List<Integer> getValues() {
         return new ArrayList<>(list);
     }
 
-    List<Integer> addToEachValue(Integer val) {
+    public List<Integer> addToEachValue(Integer val) {
         List<Integer> response = new ArrayList<>();
 
         for (int i : this.list) {
