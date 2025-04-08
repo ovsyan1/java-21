@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyValues {
-    List<Integer> list;
+    private final List<Integer> list;
 
     public MyValues(List<Integer> list) {
         this.list = list;
