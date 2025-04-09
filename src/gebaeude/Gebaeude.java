@@ -21,17 +21,25 @@ public class Gebaeude {
     }
   }
 
-  Stockwerk getStockwerk(int stockwerkNr) {
+  Stockwerk getStockwerk(int stockwerkNr) throws IndexOutOfBoundsException, Exception {
+    if(stockwerkNr < 0) {
+      throw new Exception("Stockwerk nummer muss positiv sein.");
+    }
+
     try {
-      return this.floors.get(stockwerkNr);
+      return this.floors.get(stockwerkNr == 0 ? stockwerkNr : stockwerkNr - 1);
     } catch (IndexOutOfBoundsException e) {
-      throw new IndexOutOfBoundsException("Gebäude hat nicht so viel Stockwerke");
+      throw new IndexOutOfBoundsException("Gebäude hat nicht so viel Stockwerke 'getStockwerk'");
     }
   }
 
-  Raum getRaum(int stockwerkNr, int raumNr) {
+  Raum getRaum(int stockwerkNr, int raumNr) throws IndexOutOfBoundsException, Exception {
+    if(raumNr < 0) {
+      throw new Exception("Raum nummer muss positive sein.");
+    }
+
     try {
-      return this.getStockwerk(stockwerkNr).rooms.get(raumNr);
+      return this.getStockwerk(stockwerkNr).rooms.get(raumNr == 0 ? raumNr : raumNr - 1);
     } catch (IndexOutOfBoundsException e) {
       throw new IndexOutOfBoundsException("Gebäude hat nicht so viel Stockwerke");
     }
@@ -55,7 +63,7 @@ public class Gebaeude {
 
     @Override
     public String toString() {
-      return "Stockwerk nummer " + this.floorNumber;
+      return "Stockwerk nummer " + (this.floorNumber == 0 ? this.floorNumber : this.floorNumber + 1);
     }
   }
 
@@ -70,7 +78,7 @@ public class Gebaeude {
 
     @Override
     public String toString() {
-      return "Raum " + this.floorNumber + "." + this.roomNumber + " / " + Gebaeude.this.streetName + " " + Gebaeude.this.houseNumber;
+      return "Raum " + (this.floorNumber == 0 ? this.floorNumber : this.floorNumber + 1) + "." +(this.roomNumber == 0 ? this.roomNumber : this.roomNumber + 1) + " / " + Gebaeude.this.streetName + " " + Gebaeude.this.houseNumber;
     }
   }
 }

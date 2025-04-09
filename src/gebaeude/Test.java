@@ -5,13 +5,18 @@ public class Test {
     Gebaeude ref = null;
 
     try {
-      ref = new Gebaeude("Hauptstr.", 45, 1, 10);
+      ref = new Gebaeude("Hauptstr.", 45, 3, 10);
     } catch (Exception e) {
       System.err.println(e.getMessage());
     }
 
     if (ref != null) {
-      System.out.println(ref.getRaum(0, 2));
+      try {
+        System.out.println(ref.getRaum(0, 2));
+      } catch (Exception e) {
+        System.err.println(e.getMessage());
+      }
+
     }
 
   }
