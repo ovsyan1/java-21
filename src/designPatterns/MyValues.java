@@ -3,11 +3,11 @@ package designPatterns;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyValues {
+public final class MyValues {
     private final List<Integer> list;
 
     public MyValues(List<Integer> list) {
-        this.list = list;
+        this.list = List.copyOf(list);
     }
 
     public List<Integer> getValues() {
