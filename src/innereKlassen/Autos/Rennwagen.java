@@ -3,9 +3,11 @@ package innereKlassen.Autos;
 public class Rennwagen {
   private final String title;
   private Fahrer fahrer;
+  private final Motor motor;
 
   Rennwagen(String title) {
     this.title = title;
+    this.motor = new Motor("Type1");
   }
 
   public void setFahrer(Fahrer fahrer) {
@@ -13,7 +15,7 @@ public class Rennwagen {
   }
 
   public Motor getMotor() {
-    return this.new Motor("Type1");
+    return this.motor;
   }
 
   class Motor {
