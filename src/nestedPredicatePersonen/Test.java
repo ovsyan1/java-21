@@ -9,7 +9,7 @@ public class Test {
   static class InnereKlasse implements Predicate<Person> {
     @Override
     public boolean test(Person value) {
-      return value.getNachname().contains("a");
+      return value.nachname().contains("a");
     }
   }
 
@@ -31,7 +31,7 @@ public class Test {
     class LokaleKlasse implements Predicate<Person> {
       @Override
       public boolean test(Person value) {
-        return value.getNachname().length() > 3;
+        return value.nachname().length() > 3;
       }
     }
 
@@ -48,7 +48,7 @@ public class Test {
     List<Person> listOfPersons4 = test.filtern(persons, p);
     System.out.println(listOfPersons4);
 
-    Predicate<Person> predicateLambda = x -> Year.isLeap(x.getGeburstjahr());
+    Predicate<Person> predicateLambda = x -> Year.isLeap(x.geburtsjahr());
 
     List<Person> listOfPersons5 = test.filtern(persons, predicateLambda);
     System.out.println(listOfPersons5);
