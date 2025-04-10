@@ -41,7 +41,7 @@ public class Test {
     Predicate<Person> p = new Predicate<Person>() {
       @Override
       public boolean test(Person value) {
-        return value.getGeburstjahr() == 1997 && value.getNachname().contains("a");
+        return new TopLevelKlasse().test(value) && new InnereKlasse().test(value);
       }
     };
 
