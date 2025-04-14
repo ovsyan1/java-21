@@ -12,22 +12,22 @@ public class B2 {
     }
 
     BiFunction<String, String, Integer> f1 = new F1();
-    System.out.println( f1.apply("ab", "cde") );
+    System.out.println(f1.apply("ab", "cde"));
 
     BiFunction<String, String, Integer> f2 = new BiFunction<>() {
       @Override
-        public Integer apply(String s1, String s2) {
+      public Integer apply(String s1, String s2) {
         return s1.length() + s2.length();
       }
     };
-    System.out.println( f2.apply("ab", "cde") );
+    System.out.println(f2.apply("ab", "cde"));
 
     BiFunction<String, String, Integer> f3 = (String s1, String s2) -> {
       return s1.length() + s2.length();
     };
-    System.out.println( f3.apply("ab", "cde") );
+    System.out.println(f3.apply("ab", "cde"));
 
     BiFunction<String, String, Integer> f4 = (s1, s2) -> s1.length() + s2.length();
-    System.out.println( f4.apply("ab", "cde") );
+    System.out.println(f4.apply("ab", "cde"));
   }
 }

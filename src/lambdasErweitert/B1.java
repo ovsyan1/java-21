@@ -25,9 +25,9 @@ public class B1 {
     Supplier<String> s3 = () -> {
       return "Montag";
     };
-    System.out.println("Heute ist "+s3.get());
+    System.out.println("Heute ist " + s3.get());
 
-  Supplier<String> s4 = () -> "Montag";
-    System.out.println("Heute ist "+s4.get());
-}
+    Supplier<String> s4 = () -> "Montag";
+    System.out.println("Heute ist " + s4.get());
+  }
 }
