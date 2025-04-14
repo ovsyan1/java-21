@@ -5,10 +5,10 @@ import java.util.*;
 
 public class StringTransform {
   private String value;
-  private static final List<Function<String, String>> list = new ArrayList<>();
+  private final List<Function<String, String>> listOfTransformations = new ArrayList<>();
 
-  public StringTransform addTransformation(Function<String, String> func) {
-    list.add(func);
+  public StringTransform addTransformation(Function<String, String> transformation) {
+    listOfTransformations.add(transformation);
 
     return this;
   }
@@ -16,8 +16,8 @@ public class StringTransform {
   public String process(String val) {
     var result = val;
 
-    for(Function<String, String> func : list) {
-      result = func.apply(result);
+    for(Function<String, String> transformation : listOfTransformations) {
+      result = transformation.apply(result);
     }
 
     this.value = result;
