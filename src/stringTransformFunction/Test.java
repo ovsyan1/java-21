@@ -17,7 +17,7 @@ public class Test {
 
     StringTransform t2 = new StringTransform()
       .addTransformation(s1 -> s1.contains("a") ? s1.replace("a", "A") : s1.repeat(2))
-      .addTransformation(s1 -> s1.substring(3));
+      .addTransformation(s1 -> s1.substring(6) + " ist schön");
 
     String s1 = t2.process("Guten Tag");
     System.out.println(s1);
