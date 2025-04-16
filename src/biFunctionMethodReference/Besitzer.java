@@ -8,10 +8,10 @@ public class Besitzer {
         this.name = name;
     }
 
-//    Besitzer(String name, int yearsOfExperience) {
-//        this.name = name;
-//        this.yearsOfExperience = yearsOfExperience;
-//    }
+    Besitzer (Auto auto, Integer i) {
+        this.name = auto.getBesitzer().getName();
+        this.yearsOfExperience = i;
+    }
 
     public String getName() {
         return this.name;
@@ -23,6 +23,10 @@ public class Besitzer {
 
     public void setYearsOfExperience(int num) {
         this.yearsOfExperience = num;
+    }
+
+    public static Besitzer createInstance(Auto auto, Integer i) {
+        return new Besitzer(auto, i);
     }
 
 
