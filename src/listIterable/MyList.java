@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 
 public class MyList implements Iterable<String> {
-  private String[] values = new String[10];
+  private final String[] values = new String[10];
   private int size = 0;
 
   void add(String s) throws ExceptionInInitializerError {
