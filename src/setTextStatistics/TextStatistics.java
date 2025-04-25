@@ -3,7 +3,7 @@ package setTextStatistics;
 import java.util.Collection;
 import java.util.Set;
 import java.util.HashSet;
-//import java.util.Arrays;
+// import java.util.LinkedHashSet;
 
 public class TextStatistics {
   private static String value;
@@ -21,6 +21,7 @@ public class TextStatistics {
   }
 
   Collection<Character> getUniqueChars() {
+    // Set<Character> linkedSet = new LinkedHashSet<>(); // notiert die Reihenfolge beimHinfügen
     Set<Character> set = new HashSet<>();
 
     for(char c : value.toCharArray()) {
