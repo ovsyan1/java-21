@@ -15,7 +15,7 @@ class Mirror {
     void add(Character ch) {
         this.addDivider();
 
-        this.deque.add(ch);
+        this.deque.offer(ch);
         this.deque.push(ch);
     }
 
