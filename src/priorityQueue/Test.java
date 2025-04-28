@@ -21,7 +21,6 @@ public class Test {
 
         System.out.println(priorityQueue);
 
-
         System.out.println(priorityQueue.poll());
         System.out.println(priorityQueue.poll());
         System.out.println(priorityQueue.poll());
