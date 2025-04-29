@@ -16,8 +16,11 @@ public class MapSimple {
 
         map.forEach((str, time) -> System.out.println(str + " " + time));
 
-        Set<Map.Entry<String, LocalDate>> set = map.entrySet();
+        System.out.println("************");
 
-        System.out.println(set);
+        Set<Map.Entry<String, LocalDate>> set = map.entrySet();
+        for(Map.Entry<String, LocalDate> item: set) {
+            System.out.println(item);
+        }
     }
 }
