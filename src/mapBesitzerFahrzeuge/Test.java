@@ -1,7 +1,6 @@
 package mapBesitzerFahrzeuge;
 
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 public class Test {
     public static void main(String... args) {
@@ -23,12 +22,11 @@ public class Test {
 
         System.out.println(map.get(fahrzeug1));
 
-        Map<Person, Fahrzeug> map1 = new HashMap<>();
+        Map<Person, List<Fahrzeug>> map1 = new HashMap<>();
 
-        map1.put(person1, fahrzeug1);
-        map1.put(person1, fahrzeug2);
-        map1.put(person3, fahrzeug3);
-        map1.put(person2, fahrzeug4);
+        map1.put(person1, new ArrayList<>(List.of(fahrzeug1, fahrzeug4)));
+        map1.put(person2, new ArrayList<>(List.of(fahrzeug2)));
+        map1.put(person3, new ArrayList<>(List.of(fahrzeug3)));
 
         System.out.println(map1.get(person1));
 
@@ -37,6 +35,7 @@ public class Test {
 
         System.out.println("****************");
         showElements(map1);
+
     }
 
     static <K, V> void showElements(Map<K, V> map) {
