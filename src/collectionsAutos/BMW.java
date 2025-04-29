@@ -5,8 +5,4 @@ class BMW extends Auto {
         super(modell, baujahr);
     }
 
-    @Override
-    public String toString() {
-        return "";
-    }
 }
