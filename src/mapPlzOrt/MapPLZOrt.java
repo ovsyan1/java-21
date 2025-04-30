@@ -7,8 +7,12 @@ import java.util.*;
 public class MapPLZOrt {
     public static void main(String... args) throws FileNotFoundException {
         Map<Integer, String> mapOfPostalCodes = new HashMap<>();
+        Map<String, List<String>> mapOfCities = new HashMap<>();
 
         try (Scanner sc = new Scanner(new File("src/mapPlzOrt/PLZ.txt"));) {
+            String currentCity = null;
+            List<String> listOfPostalCodes = new ArrayList<>();
+
             while (sc.hasNextLine()) {
                 String[] parts = sc.nextLine().split("\t");
 
@@ -17,6 +21,21 @@ public class MapPLZOrt {
                     String city = parts[1].replace("\"", "");
 
                     mapOfPostalCodes.put(Integer.valueOf(postalCode), city);
+
+                    if(currentCity == null || currentCity.equals(city) || mapOfCities.containsKey(city)) {
+                        currentCity = city;
+
+                        listOfPostalCodes.add(postalCode);
+                        mapOfCities.put(city, listOfPostalCodes);
+                    } else {
+                        List<String> localList = new ArrayList<>(listOfPostalCodes);
+                        mapOfCities.put(currentCity, localList);
+                        localList.add(postalCode);
+                        mapOfCities.put(city, localList);
+
+                        currentCity = city;
+                        listOfPostalCodes.clear();
+                    }
                 } else {
                     System.out.println("Unexpected format.");
                 }
@@ -24,6 +43,8 @@ public class MapPLZOrt {
         } catch (FileNotFoundException e) {
             System.err.println(e);
         }
+
+        mapOfCities.forEach(((a, b) -> System.out.println(a + " " + b)));
 
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
