@@ -5,4 +5,12 @@ class BMW extends Auto {
         super(modell, baujahr);
     }
 
+    void setBaujahr(int baujahr) {
+        this.baujahr = baujahr;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.baujahr;
+    }
 }

@@ -1,6 +1,6 @@
 package collectionsAutos;
 
-abstract class Auto {
+class Auto implements Comparable<Auto>  {
     protected int baujahr;
     protected String modell;
 
@@ -12,5 +12,10 @@ abstract class Auto {
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + ". Modell: " + this.modell + ", Baujahr " + this.baujahr;
+    }
+
+    @Override
+    public int compareTo(Auto auto) {
+        return this.modell.compareTo(auto.modell) == 0 ? this.baujahr - auto.baujahr : this.modell.compareTo(auto.modell);
     }
 }
