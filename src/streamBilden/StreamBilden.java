@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.Stream;
-import java.util.Collection;
-import java.util.ArrayList;
 
 public class StreamBilden {
   public static void main(String[] args) {
