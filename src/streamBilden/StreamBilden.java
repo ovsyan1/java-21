@@ -13,7 +13,7 @@ public class StreamBilden {
 
 
     Stream
-      .concat(Stream.of(list1), Stream.of(list2))
+      .of(list1, list2)
       .forEach(e -> System.out.println("size = " + e.size() + ". elements = " + e));
 
     System.out.println("************");
