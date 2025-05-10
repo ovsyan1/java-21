@@ -70,12 +70,6 @@ public class ReducePersonen {
     BinaryOperator<Person> acc2 = (a, b) -> {
       var person = new Person();
 
-      if (a.getVorname().isEmpty()) {
-        person.setVorname(b.getVorname());
-        if (a.getNachname().isEmpty()) {
-          person.setNachname(b.getNachname());
-        }
-      } else {
         if (a.getVorname().compareTo(b.getVorname()) > 0) {
           person.setVorname(a.getVorname());
         } else {
@@ -86,7 +80,6 @@ public class ReducePersonen {
         } else {
           person.setNachname(b.getNachname());
         }
-      }
 
       return person;
     };
@@ -94,6 +87,8 @@ public class ReducePersonen {
     System.out.println("2: " + list.stream()
       .reduce(new Person(), acc2));
 
-    System.out.println("3: " + list.stream().reduce(new Person(), acc2, (a, b) -> a));
+    System.out.println("3: " + list.stream()
+      .parallel()
+      .reduce(new Person(), acc2, acc2));
   }
 }
