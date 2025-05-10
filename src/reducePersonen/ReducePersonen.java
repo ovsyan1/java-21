@@ -67,28 +67,11 @@ public class ReducePersonen {
       .reduce(acc)
       .ifPresent(System.out::println);
 
-    BinaryOperator<Person> acc2 = (a, b) -> {
-      var person = new Person();
-
-        if (a.getVorname().compareTo(b.getVorname()) > 0) {
-          person.setVorname(a.getVorname());
-        } else {
-          person.setVorname(b.getVorname());
-        }
-        if (a.getNachname().compareTo(b.getNachname()) > 0) {
-          person.setNachname(a.getNachname());
-        } else {
-          person.setNachname(b.getNachname());
-        }
-
-      return person;
-    };
-
     System.out.println("2: " + list.stream()
-      .reduce(new Person(), acc2));
+      .reduce(new Person(), acc));
 
     System.out.println("3: " + list.stream()
       .parallel()
-      .reduce(new Person(), acc2, acc2));
+      .reduce(new Person(), acc, acc));
   }
 }
