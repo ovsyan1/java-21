@@ -30,7 +30,9 @@ class TextStatisticsImpl implements TextStatistics {
   }
 
   public int getCountChars() {
-    return (int) Stream.of(this.text.split("")).count();
+    //return (int) Stream.of(this.text.split("")).count();
+    // return this.text.length();
+    return (int)this.text.chars().count();
   }
 
   public int getCountSpecialChars() {
