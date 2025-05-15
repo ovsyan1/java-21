@@ -29,7 +29,12 @@ public class WordsStream {
     System.out.println("Length more than 5: " + words.stream().filter(s -> s.length() > 5).count());
 
     System.out.println("***** A2");
-    words.stream().filter(str -> str.charAt(0) == 'm').forEach(System.out::println);
+    Optional<String> word = words.stream()
+      .filter(str -> str.charAt(0) == 'm')
+      .min(Comparator.reverseOrder());
+    word.ifPresentOrElse(
+      s -> System.out.println("Smallest word with leading m: " + s),
+      () -> System.out.println("No one match"));
 
     System.out.println("***** A3");
     words.stream().skip(20).limit(10).forEach(System.out::println);
@@ -57,6 +62,16 @@ public class WordsStream {
           String::length,
           TreeMap::new,
           Collectors.toList()
+        ))
+      .forEach((k, v) -> System.out.println(k + " " + v));
+
+    System.out.println("***** A8");
+    passwords.stream()
+      .collect(
+        Collectors.groupingBy(
+          String::length,
+          TreeMap::new,
+          Collectors.counting()
         ))
       .forEach((k, v) -> System.out.println(k + " " + v));
   }
