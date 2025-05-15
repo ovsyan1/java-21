@@ -17,9 +17,11 @@ public class WordsStream {
     while(wordsScanner.hasNext()) {
       words.add(wordsScanner.next());
     }
+    wordsScanner.close();
     while(passwordsScanner.hasNext()) {
       passwords.add(passwordsScanner.next());
     }
+    passwordsScanner.close();
     System.out.println("Default words length: " + words.size());
     System.out.println("Default password length: " + passwords.size());
 
