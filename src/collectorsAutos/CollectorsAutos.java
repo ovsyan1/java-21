@@ -1,3 +1,5 @@
+package collectorsAutos;
+
 import java.util.*;
 import java.util.stream.*;
 import java.util.function.Function;
@@ -23,7 +25,7 @@ class Auto {
   }
 }
 
-public class collectorsAutos {
+public class CollectorsAutos {
   public static void main(String... args) {
     List<Auto> autos = Arrays.asList(
       new Auto("VW", "Golf"),
