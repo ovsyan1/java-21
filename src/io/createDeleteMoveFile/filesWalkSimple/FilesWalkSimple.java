@@ -22,19 +22,13 @@ public class FilesWalkSimple {
 
   static void printSubdirs(Path dir) throws IOException {
     try (Stream<Path> paths = Files.list(dir)) {
-      paths.forEach(path -> {
-        if (Files.isDirectory(path))
-          System.out.println(path);
-      });
+      paths.filter(Files::isDirectory).forEach(System.out::println);
     }
   }
 
   static void printFiles(Path dir) throws IOException {
     try (Stream<Path> paths = Files.list(dir)) {
-      paths.forEach(path -> {
-        if (Files.isRegularFile(path))
-          System.out.println(path);
-      });
+      paths.filter(Files::isRegularFile).forEach(System.out::println);
     }
   }
 
