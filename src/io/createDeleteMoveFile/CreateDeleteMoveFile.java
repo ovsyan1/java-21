@@ -8,9 +8,9 @@ import java.io.File;
 public class CreateDeleteMoveFile {
   public static void main(String... args) {
     String rootName = "src/io";
-     createFiles(rootName, "file", "txt", 2);
+     // createFiles(rootName, "file", "txt", 2);
      // moveFiles(rootName, "src/io/folderForFiles", "txt");
-     // deleteFiles(rootName, "txt");
+      deleteFiles(rootName, "txt");
   }
 
   static void createFiles(String rootName, String prefix, String extension, int count) {
@@ -42,7 +42,7 @@ public class CreateDeleteMoveFile {
     for (File file : listOfFiles) {
       if (file.toString().endsWith(extension)) {
         try {
-          Files.move(file.toPath(), Path.of(targetRootName + "/" + file.toPath().getFileName()));
+          Files.move(file.toPath(), Path.of(targetRootName).resolve(file.toPath().getFileName()));
         } catch (IOException e) {
           System.out.println("ex: " + e.getMessage());
         }
