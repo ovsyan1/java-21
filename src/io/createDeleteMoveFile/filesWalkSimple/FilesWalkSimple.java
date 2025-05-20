@@ -25,7 +25,6 @@ public class FilesWalkSimple {
       pathes.forEach(path -> {
         if (Files.isDirectory(path))
           System.out.println(path);
-
       });
     }
   }
@@ -35,7 +34,6 @@ public class FilesWalkSimple {
       pathes.forEach(path -> {
         if (Files.isRegularFile(path))
           System.out.println(path);
-
       });
     }
   }
