@@ -21,8 +21,8 @@ public class FilesWalkSimple {
   }
 
   static void printSubdirs(Path dir) throws IOException {
-    try (Stream<Path> pathes = Files.list(dir)) {
-      pathes.forEach(path -> {
+    try (Stream<Path> paths = Files.list(dir)) {
+      paths.forEach(path -> {
         if (Files.isDirectory(path))
           System.out.println(path);
       });
@@ -30,8 +30,8 @@ public class FilesWalkSimple {
   }
 
   static void printFiles(Path dir) throws IOException {
-    try (Stream<Path> pathes = Files.list(dir)) {
-      pathes.forEach(path -> {
+    try (Stream<Path> paths = Files.list(dir)) {
+      paths.forEach(path -> {
         if (Files.isRegularFile(path))
           System.out.println(path);
       });
