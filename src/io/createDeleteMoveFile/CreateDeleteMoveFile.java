@@ -17,7 +17,7 @@ public class CreateDeleteMoveFile {
     for (int i = 1; i <= count; i++) {
       String fileName = String.format(prefix + "%03d." + extension, i); // s = "file012.txt"
       try {
-        Files.createFile(Path.of(rootName + "/" + fileName));
+        Files.createFile(Path.of(rootName).resolve(fileName));
       } catch (IOException e) {
         System.out.println(e.getMessage());
       }
