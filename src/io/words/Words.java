@@ -30,12 +30,12 @@ public class Words {
 
     words.stream()
       .collect(Collectors.groupingBy(word -> word.toLowerCase().substring(0, 1)))
-      .forEach((k, v) -> createFiles(myDir, k, v, extension));
+      .forEach((k, v) -> createFile(myDir, k, v, extension));
 
     deleteFiles(myDir, extension);
   }
 
-  static void createFiles(Path path, String key, List<String> words, String extension) {
+  static void createFile(Path path, String key, List<String> words, String extension) {
     Path targetPath = path.resolve(key + "." + extension);
     try {
       Files.createFile(targetPath);
