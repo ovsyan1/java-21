@@ -16,7 +16,7 @@ public class FilesWalkSimple {
     System.out.println("Files: ");
     printFiles(myRoot);
 
-    System.out.println("Empty files: ");
+    System.out.println("Empty folders: ");
     printEmptySubdirs(myRoot);
   }
 
@@ -34,9 +34,9 @@ public class FilesWalkSimple {
 
   static void printEmptySubdirs(Path dir) throws IOException {
     try (Stream<Path> files = Files.walk(dir)) {
-      files.forEach(path -> {
-        try {
-          if (Files.isRegularFile(path) && Files.size(path) == 0) {
+      files.filter(Files::isDirectory).forEach(path -> {
+        try(Stream<Path> paths = Files.list(path)) {
+          if (paths.findAny().isEmpty()) {
             System.out.println(path + " size: " + Files.size(path));
           }
         } catch (IOException e) {
