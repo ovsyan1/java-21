@@ -28,7 +28,7 @@ public class FilesWalkSimple {
 
   static void printFiles(Path dir) throws IOException {
     try (Stream<Path> paths = Files.list(dir)) {
-      paths.filter(Files::isRegularFile).forEach(System.out::println);
+      paths.filter(Files::isRegularFile).map(Path::getFileName).forEach(System.out::println);
     }
   }
 
