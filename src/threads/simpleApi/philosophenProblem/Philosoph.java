@@ -1,25 +1,31 @@
 package threads.simpleApi.philosophenProblem;
 
-class Philosoph implements Runnable {
+import java.util.concurrent.locks.Lock;
+
+class Philosoph extends Thread {
   private final String name;
-  private Object linkeGable, rechteGable;
+  private Lock linkeGable;
+  private Lock rechteGabel;
 
 
-  Philosoph(String name) {
+  Philosoph(String name, Lock lock) {
     this.name = name;
+    this.start();
   }
 
-  void setLinkeGabel(Object linkeGable) {
+  void setLinkeGable(Lock linkeGable) {
     this.linkeGable = linkeGable;
   }
 
-  void setRechteGable(Object rechteGable) {
-    this.rechteGable = rechteGable;
+  void setRechteGabel(Lock rechteGabel) {
+    this.rechteGabel = rechteGabel;
   }
+
 
   @Override
   public void run() {
-    while(true) {
+
+    while (true) {
       System.out.println(this.name + " denkt nach...");
       try {
         Thread.sleep(1000);
@@ -29,12 +35,10 @@ class Philosoph implements Runnable {
 
       System.out.println(this.name + " hat Hunger");
 
-      synchronized (linkeGable) {
+      if (linkeGable.tryLock()) {
         System.out.println(this.name + " nimmt die linke Gabel");
-
-        synchronized (rechteGable) {
+        if (rechteGabel.tryLock()) {
           System.out.println(this.name + " nimmt die rechte Gabel");
-
           System.out.println(this.name + " isst...");
           try {
             Thread.sleep(300);
@@ -42,12 +46,12 @@ class Philosoph implements Runnable {
             throw new RuntimeException(e);
           }
           System.out.println(this.name + " legt die rechte Gabel ab");
+          rechteGabel.unlock();
         }
+        System.out.println(this.name + " legt die linke Gabel ab");
+        System.out.println();
+        linkeGable.unlock();
       }
-
-
-      System.out.println(this.name + " legt die linke Gabel ab");
-      System.out.println();
     }
   }
 
