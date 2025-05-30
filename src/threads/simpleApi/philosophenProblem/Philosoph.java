@@ -36,21 +36,29 @@ class Philosoph extends Thread {
       System.out.println(this.name + " hat Hunger");
 
       if (linkeGable.tryLock()) {
-        System.out.println(this.name + " nimmt die linke Gabel");
-        if (rechteGabel.tryLock()) {
-          System.out.println(this.name + " nimmt die rechte Gabel");
-          System.out.println(this.name + " isst...");
-          try {
-            Thread.sleep(300);
-          } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-          }
-          System.out.println(this.name + " legt die rechte Gabel ab");
-          rechteGabel.unlock();
+        try {
+          System.out.println(this.name + " nimmt die linke Gabel");
+          if (rechteGabel.tryLock()) {
+            try {
+              System.out.println(this.name + " nimmt die rechte Gabel");
+              System.out.println(this.name + " isst...");
+              try {
+                Thread.sleep(300);
+              } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+              }
+              System.out.println(this.name + " legt die rechte Gabel ab");
+
+            } finally {
+              rechteGabel.unlock();
+            }
+
         }
-        System.out.println(this.name + " legt die linke Gabel ab");
-        System.out.println();
-        linkeGable.unlock();
+          System.out.println(this.name + " legt die linke Gabel ab");
+          System.out.println();
+        } finally {
+          linkeGable.unlock();
+        }
       }
     }
   }
