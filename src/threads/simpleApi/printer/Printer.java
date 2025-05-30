@@ -1,5 +1,7 @@
 package threads.simpleApi.printer;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Printer extends Thread {
     private final char zeichen;
     private final int anzahl;
