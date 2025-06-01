@@ -22,7 +22,7 @@ public class ExecutorServiceWords {
 
         List<List<String>> lists = Helper.splitList(words, countOfThreads);
 
-        try (ExecutorService service = Executors.newSingleThreadExecutor()) {
+        try (ExecutorService service = Executors.newCachedThreadPool()) {
             List<Long> listOfSums = new ArrayList<>();
 
             lists.forEach((list) -> {
