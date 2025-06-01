@@ -8,12 +8,12 @@ import java.util.stream.LongStream;
 
 public class ExecutorServiceWords {
     public static void main(String... unused) throws FileNotFoundException {
-        List<String> words = WordsReader.getWords("src/threads/simpleApi/executorService/english-words.txt");
+        List<String> words = WordsReader.getWords("src/wordsStreams/english-words.txt");
         System.out.println("Original words size: " + (long) words.size());
 
-//        t4(words);
+        t4(words);
         t5(words);
-//        t6(words);
+        t6(words);
         t7(words);
     }
 
