@@ -20,7 +20,7 @@ public class ExecutorServiceWords {
     static void t7(List<String> words) {
         int countOfThreads = 50;
 
-        List<List<String>> lists = Helper.cutListOfWords(words, countOfThreads);
+        List<List<String>> lists = Helper.splitList(words, countOfThreads);
 
         try (ExecutorService service = Executors.newSingleThreadExecutor()) {
             List<Long> listOfSums = new ArrayList<>();
@@ -40,7 +40,7 @@ public class ExecutorServiceWords {
     static void t6(List<String> words) {
         int countOfThreads = 50;
 
-        List<List<String>> lists = Helper.cutListOfWords(words, countOfThreads);
+        List<List<String>> lists = Helper.splitList(words, countOfThreads);
 
         try (ExecutorService service = Executors.newFixedThreadPool(countOfThreads)) {
             lists.forEach((list) -> {

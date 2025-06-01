@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Helper {
-    static List<List<String>> cutListOfWords(List<String> list, int countOfThreads) {
+    static List<List<String>> splitList(List<String> list, int countOfThreads) {
         int totalSize = list.size();
         int chunkSize = (int) Math.ceil((double) totalSize / countOfThreads);
         List<List<String>> lists = new ArrayList<>();
