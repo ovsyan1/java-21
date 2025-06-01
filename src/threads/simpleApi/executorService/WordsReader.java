@@ -7,22 +7,19 @@ import java.util.List;
 import java.util.Scanner;
 
 class WordsReader {
-    private final String path;
-    private final List<String> listOfWords = new ArrayList<>();
+    private WordsReader() {}
 
-    WordsReader(String path) {
-        this.path = path;
-    }
+    static List<String> getWords(String path) {
+        List<String> listOfWords = new ArrayList<>();
 
-    List<String> getWords() {
-        try (Scanner wordsScanner = new Scanner(new FileReader(this.path))) {
+        try (Scanner wordsScanner = new Scanner(new FileReader(path))) {
             while (wordsScanner.hasNext()) {
-                this.listOfWords.add(wordsScanner.next());
+                listOfWords.add(wordsScanner.next());
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
 
-        return this.listOfWords;
+        return listOfWords;
     }
 }
