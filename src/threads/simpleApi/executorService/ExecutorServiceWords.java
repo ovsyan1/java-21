@@ -26,7 +26,7 @@ public class ExecutorServiceWords {
             List<Long> listOfSums = new ArrayList<>();
 
             lists.forEach((list) -> {
-                Future<Long> future = service.submit(() -> list.stream().filter(w -> w.length() > 5).count());
+                Future<Long> future = service.submit(() -> list.stream().filter(w -> w.length() == 5).count());
                 try {
                     listOfSums.add(future.get());
                 } catch (InterruptedException | ExecutionException e) {
@@ -44,7 +44,7 @@ public class ExecutorServiceWords {
 
         try (ExecutorService service = Executors.newFixedThreadPool(countOfThreads)) {
             lists.forEach((list) -> {
-                Future<Long> future = service.submit(() -> list.stream().filter(w -> w.length() > 5).count());
+                Future<Long> future = service.submit(() -> list.stream().filter(w -> w.length() == 5).count());
 
                 try {
                     System.out.println(future.get());
@@ -56,7 +56,7 @@ public class ExecutorServiceWords {
     }
 
     static void t5(List<String> words) {
-        Callable<Long> task = () -> words.stream().filter(w -> w.length() > 5).count();
+        Callable<Long> task = () -> words.stream().filter(w -> w.length() == 5).count();
 
         try (ExecutorService service = Executors.newSingleThreadExecutor()) {
             Future<Long> future = service.submit(task);
