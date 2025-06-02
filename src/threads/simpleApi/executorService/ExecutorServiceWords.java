@@ -62,7 +62,7 @@ public class ExecutorServiceWords {
             Future<Long> future = service.submit(task);
 
             try {
-                System.out.println("Words longer than 5(TASK 5, SUM) " + future.get());
+                System.out.println("TASK 5 (SUM): " + future.get());
             } catch (ExecutionException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
