@@ -37,8 +37,9 @@ public class ExecutorServiceSimple {
 
         try(ExecutorService service3 = Executors.newSingleThreadExecutor()) {
             List<Future<Integer>> list = new ArrayList<>();
+            Callable<Integer> task = () -> rnd.nextInt(1, 10);
+
             for(int i = 0; i < 100; i++) {
-                Callable<Integer> task = () -> rnd.nextInt(1, 10);
                 list.add(service3.submit(task));
             }
 
