@@ -24,9 +24,9 @@ public class ExecutorServiceWords {
 
         try (ExecutorService service = Executors.newCachedThreadPool()) {
             List<Long> listOfSums = new ArrayList<>();
+            List<Future<Long>> futures = service.invokeAll(lists.stream().map(Helper::getCallable).toList());
 
-            lists.forEach((list) -> {
-                Future<Long> future = service.submit(() -> list.stream().filter(w -> w.length() == 5).count());
+            futures.forEach((future) -> {
                 try {
                     listOfSums.add(future.get());
                 } catch (InterruptedException | ExecutionException e) {
@@ -34,24 +34,27 @@ public class ExecutorServiceWords {
                 }
             });
             System.out.println("TASK 7 (SUM): " + listOfSums.stream().flatMapToLong(LongStream::of).sum());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
     static void t6(List<String> words) {
         int countOfThreads = 50;
-
         List<List<String>> lists = Helper.splitList(words, countOfThreads);
 
         try (ExecutorService service = Executors.newFixedThreadPool(countOfThreads)) {
-            lists.forEach((list) -> {
-                Future<Long> future = service.submit(() -> list.stream().filter(w -> w.length() == 5).count());
+            List<Future<Long>> futures = service.invokeAll(lists.stream().map(Helper::getCallable).toList());
 
+            futures.forEach((future) -> {
                 try {
                     System.out.println(future.get());
-                } catch (InterruptedException | ExecutionException e) {
+                } catch (ExecutionException | InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             });
+        } catch (InterruptedException e) {
+            System.out.println(e.getMessage());
         }
     }
 

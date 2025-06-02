@@ -2,6 +2,7 @@ package threads.simpleApi.executorService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 class Helper {
     static List<List<String>> splitList(List<String> list, int countOfThreads) {
@@ -15,5 +16,9 @@ class Helper {
         }
 
         return lists;
+    }
+
+    static Callable<Long> getCallable(List<String> list) {
+        return () -> list.stream().filter(w -> w.length() == 5).count();
     }
 }
