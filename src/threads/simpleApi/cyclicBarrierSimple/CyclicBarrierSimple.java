@@ -13,8 +13,8 @@ public class CyclicBarrierSimple {
 
         Runnable task = () -> {
             for (int i = 0; i < barrier; i++) {
-                count.incrementAndGet();
                 try {
+                    count.incrementAndGet();
                     c1.await();
                 } catch (InterruptedException | BrokenBarrierException e) {
                     throw new RuntimeException(e);
