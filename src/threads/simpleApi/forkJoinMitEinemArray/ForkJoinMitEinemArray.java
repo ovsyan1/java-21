@@ -1,15 +1,13 @@
 package threads.simpleApi.forkJoinMitEinemArray;
 
 import java.util.Arrays;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.ForkJoinPool;
 
 public class ForkJoinMitEinemArray {
     public static void main(String... unused) {
-        int[] arr1 = Stream.generate(() -> ThreadLocalRandom.current().nextInt(-50, 51)).limit(20).flatMapToInt(IntStream::of).toArray();
-        int[] arr2 = Stream.generate(() -> ThreadLocalRandom.current().nextInt(-50, 51)).limit(20).flatMapToInt(IntStream::of).toArray();
+        int[] arr1 = ThreadLocalRandom.current().ints(-50, 51).limit(20).toArray();
+        int[] arr2 = ThreadLocalRandom.current().ints(-50, 51).limit(20).toArray();
         System.out.println("First array before compute: " + Arrays.toString(arr1));
 
         try (ForkJoinPool pool = new ForkJoinPool()) {
