@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CyclicBarrierSimple {
     static AtomicInteger count = new AtomicInteger(0);
 
-    public static void main(String... unused) throws InterruptedException, BrokenBarrierException {
+    public static void main(String... unused) {
         int barrier = 1_000_000;
         CyclicBarrier c1 = new CyclicBarrier(2, () -> System.out.println(count.get()));
 
