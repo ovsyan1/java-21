@@ -8,8 +8,13 @@ public class CyclicBarrierSimple {
     static AtomicInteger count = new AtomicInteger(0);
 
     public static void main(String... unused) {
+        int parties = 2;
         int barrier = 1_000_000;
-        CyclicBarrier c1 = new CyclicBarrier(2, () -> System.out.println(count.get()));
+        CyclicBarrier c1 = new CyclicBarrier(parties, () -> {
+            if(parties * barrier == count.get()) {
+                System.out.println(count.get());
+            }
+        });
 
         Runnable task = () -> {
             for (int i = 0; i < barrier; i++) {
