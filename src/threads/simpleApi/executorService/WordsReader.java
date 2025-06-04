@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class WordsReader {
+public class WordsReader {
     private WordsReader() {}
 
-    static List<String> getWords(String path) {
+    public static List<String> getWords(String path) {
         List<String> listOfWords = new ArrayList<>();
 
         try (Scanner wordsScanner = new Scanner(new FileReader(path))) {
