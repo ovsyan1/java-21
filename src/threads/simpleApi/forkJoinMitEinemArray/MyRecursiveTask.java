@@ -1,12 +1,13 @@
 package threads.simpleApi.forkJoinMitEinemArray;
 
 import java.util.concurrent.RecursiveTask;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MyRecursiveTask extends RecursiveTask<Integer> {
     public static final int THRESHOLD = 5;
     private final int[] arr;
     private final int START, END;
-    private static int zeroCount = 0;
+    private static AtomicInteger zeroCount = new AtomicInteger(0);
 
     MyRecursiveTask(int[] arr, int start, int end) {
         this.arr = arr;
@@ -18,7 +19,7 @@ public class MyRecursiveTask extends RecursiveTask<Integer> {
     protected Integer compute() {
         if ((END - START) <= THRESHOLD) {
             for (int i = this.START; i < this.END; i++) {
-                if (arr[i] < 0) zeroCount++;
+                if (arr[i] < 0) zeroCount.incrementAndGet();
             }
         } else {
             int indexMid = (START + END) / 2;
@@ -29,7 +30,7 @@ public class MyRecursiveTask extends RecursiveTask<Integer> {
             invokeAll(leftSide, rightSide);
         }
 
-        return zeroCount;
+        return zeroCount.get();
     }
 
 }
