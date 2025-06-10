@@ -52,8 +52,37 @@ public class Taschenrechner {
     }
   }
 
-  private static char readUserChar() {
-    return new Scanner(System.in).nextLine().charAt(0);
+  private static char readUserChar(EUserAnswerType answerType) {
+    ResourceBundle t = ResourceBundle.getBundle(Taschenrechner.transTextPath);
+    ResourceBundle tEx = ResourceBundle.getBundle(Taschenrechner.transExPath);
+    char[] possibleUserAnswers = {'+', '-', '*', '/'};
+
+    char userAnswer = new Scanner(System.in).nextLine().charAt(0);
+
+    if (answerType.equals(EUserAnswerType.LITERAL)) {
+      char positiveAnswer = t.getString("userLastQuestionAnswerPositive").charAt(0);
+      char negativeAnswer = t.getString("userLastQuestionAnswerNegative").charAt(0);
+
+      if (userAnswer == positiveAnswer || userAnswer == negativeAnswer) {
+        return userAnswer;
+      } else {
+        System.out.println(tEx.getString("plsProvideExactlyChars"));
+        return readUserChar(answerType);
+      }
+    } else if (answerType.equals(EUserAnswerType.MATH)) {
+      for (char possibleUserAnswer : possibleUserAnswers) {
+        if (userAnswer == possibleUserAnswer) {
+          return userAnswer;
+        }
+      }
+
+      System.out.println(tEx.getString("notSupportedOperator") + " " + userAnswer);
+      System.out.print(t.getString("operator") + " (+, -, *, /): ");
+
+      return readUserChar(answerType);
+    } else {
+      return 0;
+    }
   }
 
   private static void calculation() {
@@ -65,15 +94,15 @@ public class Taschenrechner {
 
     while (repeat == t.getString("userLastQuestionAnswerPositive").charAt(0)) {
       System.out.print("1. " + t.getString("zahl") + ": ");
-      double a = readUserNumber(1);
+      double firstInput = readUserNumber(1);
 
       System.out.print(t.getString("operator") + " (+, -, *, /): ");
-      char operator = readUserChar();
+      char operator = readUserChar(EUserAnswerType.MATH);
 
       System.out.print("2. " + t.getString("zahl") + ": ");
-      double b = readUserNumber(2);
+      double secondInput = readUserNumber(2);
 
-      BinaryOperator<Double> op = null;
+      BinaryOperator<Double> op;
 
       switch (operator) {
         case '+':
@@ -94,17 +123,17 @@ public class Taschenrechner {
           continue;
       }
 
-      double result = op.apply(a, b);
+      double result = op.apply(firstInput, secondInput);
       System.out.println(t.getString("result") + " " + result);
 
       System.out.print(t.getString("tryAgain") + " ");
-      repeat = readUserChar();
+      repeat = readUserChar(EUserAnswerType.LITERAL);
     }
   }
 
   private static double readUserNumber(int inputCount) {
-    var t = ResourceBundle.getBundle(Taschenrechner.transTextPath);
-    var tEx = ResourceBundle.getBundle(Taschenrechner.transExPath);
+    ResourceBundle t = ResourceBundle.getBundle(Taschenrechner.transTextPath);
+    ResourceBundle tEx = ResourceBundle.getBundle(Taschenrechner.transExPath);
 
     try {
       return new Scanner(System.in).nextDouble();
@@ -112,9 +141,7 @@ public class Taschenrechner {
       System.out.println(tEx.getString("inputMismatchEx"));
       System.out.print(inputCount + ". " + t.getString("zahl") + ": ");
 
-      readUserNumber(inputCount);
-
-      return 0.0;
+      return readUserNumber(inputCount);
     }
   }
 }
