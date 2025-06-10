@@ -30,15 +30,17 @@ public class Taschenrechner {
   }
 
   private static void readUserLang() {
-    String userAnswer = new Scanner(System.in).nextLine();
+    // String userAnswer = new Scanner(System.in).nextLine();
+    // Path pathWithScanner = Path.of("src/localization/taschenrechner/calculator.properties");
+    String userAnswer = System.console().readLine();
+    Path pathWithConsole = Path.of("localization/taschenrechner/calculator.properties");
 
     if (userAnswer.equals("de") || userAnswer.equals("en")) {
       try {
-        Path mainPropsPath = Path.of("src/localization/taschenrechner/calculator.properties");
-        Files.createFile(mainPropsPath);
+        Files.createFile(pathWithConsole);
 
         String userAnswerWithKey = "lang=" + userAnswer;
-        Files.writeString(mainPropsPath, userAnswerWithKey);
+        Files.writeString(pathWithConsole, userAnswerWithKey);
       } catch (IOException e) {
         System.out.println(e.getMessage());
       } finally {
